@@ -1,6 +1,8 @@
 package pl.coderslab.app.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -12,6 +14,12 @@ public class Book {
     private String title;
     private Integer rating;
     private String description;
+
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
+
+
+
 
     public Long getId() {
         return id;
@@ -43,6 +51,14 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     @Override

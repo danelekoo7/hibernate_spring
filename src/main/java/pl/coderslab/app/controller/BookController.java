@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.app.dao.AuthorDao;
 import pl.coderslab.app.dao.BookDao;
 import pl.coderslab.app.dao.PublisherDao;
+import pl.coderslab.app.entity.Author;
 import pl.coderslab.app.entity.Book;
 import pl.coderslab.app.entity.Publisher;
 
@@ -14,10 +16,12 @@ import pl.coderslab.app.entity.Publisher;
 public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
+    private final AuthorDao authorDao;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
+        this.authorDao = authorDao;
     }
 
 
@@ -28,6 +32,27 @@ public class BookController {
         book.setTitle("Thinking in Java");
         book.setDescription("nauka javy");
         book.setRating(4);
+
+        bookDao.saveBook(book);
+        return "Id dodanej książki to:"
+                + book.getId();
+    }
+
+    @RequestMapping("/addBookWithAuthors")
+    @ResponseBody
+    public String addBookWithAuthors() {
+        Book book = new Book();
+        book.setTitle("Thinking in Java");
+        book.setDescription("nauka javy");
+        book.setRating(4);
+
+        Author author1 = authorDao.findById(1);
+        Author author2 = authorDao.findById(3);
+
+
+        book.getAuthors().add(author1);
+        book.getAuthors().add(author2);
+
         bookDao.saveBook(book);
         return "Id dodanej książki to:"
                 + book.getId();
@@ -42,7 +67,7 @@ public class BookController {
 
     @RequestMapping("/book/update/{id}/{title}")
     @ResponseBody
-    public String updateBook(@PathVariable long id, @PathVariable String title ) {
+    public String updateBook(@PathVariable long id, @PathVariable String title) {
         Book book = bookDao.findById(id);
         book.setTitle(title);
         bookDao.update(book);
@@ -60,7 +85,7 @@ public class BookController {
 
     @GetMapping(value = "/addBookWithPublisher")
     @ResponseBody
-    public Publisher createWithPublisher(){
+    public Publisher createWithPublisher() {
         Book book = new Book();
         book.setTitle("Nowa ksiazka");
         book.setDescription("Z nowym opisem");
@@ -79,7 +104,7 @@ public class BookController {
 
     @GetMapping(value = "/addBookWithPublisher2")
     @ResponseBody
-    public String createWithPublisher2(){
+    public String createWithPublisher2() {
         Book book = new Book();
         book.setTitle("Nowa ksiazka");
         book.setDescription("Z nowym opisem");
