@@ -27,10 +27,10 @@ import java.util.List;
 public class AppConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-        stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain",
-                Charset.forName("UTF-8"))));
-        converters.add(stringConverter);
+//        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+//        stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain",
+//                Charset.forName("UTF-8"))));
+//        converters.add(stringConverter);
     }
     @Bean
     public ViewResolver viewResolver() {

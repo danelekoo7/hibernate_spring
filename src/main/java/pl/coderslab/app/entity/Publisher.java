@@ -1,6 +1,8 @@
 package pl.coderslab.app.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "publishers")
@@ -10,6 +12,10 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+
+    @OneToMany
+    private List<Book> books = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -27,11 +33,20 @@ public class Publisher {
         this.name = name;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", books=" + books +
                 '}';
     }
 }
