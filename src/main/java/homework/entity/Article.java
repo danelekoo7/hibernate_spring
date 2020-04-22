@@ -11,7 +11,8 @@ import java.util.List;
 public class Article {
 
     @Id
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(length = 200)
     private String title;
 
@@ -19,7 +20,7 @@ public class Article {
     @JoinColumn(name = "id_author")
     private Author author;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 
     private String content;
@@ -27,13 +28,12 @@ public class Article {
     private LocalDateTime created;
     private LocalDateTime updated;
 
-
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -87,7 +87,7 @@ public class Article {
     @Override
     public String toString() {
         return "Article{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", title='" + title + '\'' +
                 ", author=" + author +
                 ", categories=" + categories +
