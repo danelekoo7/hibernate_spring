@@ -15,8 +15,12 @@ public class Book {
     private Integer rating;
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors = new ArrayList<>();
+
+    @ManyToMany
+    private List<Publisher> publishers = new ArrayList<>();
+
 
 
 
@@ -60,6 +64,8 @@ public class Book {
     public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
+
+
 
     @Override
     public String toString() {

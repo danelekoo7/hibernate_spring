@@ -14,7 +14,9 @@ public class Publisher {
     private String name;
 
 
-    @OneToMany
+//    @OneToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(mappedBy = "publishers", fetch = FetchType.EAGER)
     private List<Book> books = new ArrayList<>();
 
     public Long getId() {
@@ -33,13 +35,7 @@ public class Publisher {
         this.name = name;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
 
     @Override
     public String toString() {
@@ -49,4 +45,6 @@ public class Publisher {
                 ", books=" + books +
                 '}';
     }
+
+
 }

@@ -1,4 +1,4 @@
-package pl.coderslab.app.controller;
+package pl.coderslab.app.controller.day1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

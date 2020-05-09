@@ -1,4 +1,4 @@
-package pl.coderslab.app.controller;
+package pl.coderslab.app.controller.day1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,7 +94,7 @@ public class BookController {
 
         Publisher publisher = new Publisher();
         publisher.setName("Nowy publisher");
-        publisher.getBooks().add(book);
+//        publisher.getBooks().add(book);
 
         publisherDao.savePublisher(publisher);
 
@@ -113,7 +113,7 @@ public class BookController {
 
         Publisher publisher = new Publisher();
         publisher.setName("Nowy publisher");
-        publisher.getBooks().add(book);
+//        publisher.getBooks().add(book);
 
         publisherDao.savePublisher(publisher);
 
